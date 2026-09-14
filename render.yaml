@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: xyven-ads-bot
+    env: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: BOT_TOKEN
+        value: 8935830429:AAHVMuTqsO2rU1n1xxZhEPHFWhhMUhG_HbA
+      - key: OWNER_ID
+        value: "8969622561"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: xyven-db
+          property: connectionString
+      - key: WEBHOOK_BASE_URL
+        value: https://xyven-ads-bot.onrender.com
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: VERIFY_TOKEN_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        value: xyven-admin-2024
+      - key: WEBSITE_URL
+        value: https://uc-store-xyven.onrender.com
+      - key: AD_INTERVAL_MINUTES
+        value: "180"
+      - key: MAX_ADS_PER_DAY
+        value: "5"
+
+databases:
+  - name: xyven-db
+    plan: free
+    region: singapore
+    databaseName: xyven
+    user: xyven
